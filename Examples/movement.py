@@ -1,22 +1,23 @@
 import display
 import time
 import random
-import _thread
 
-FPS = 100
-
-win = display.Window(5, 5)
+FPS = 30
 
 x = 1
 y = 1
 
 dir = [0, 0]
 
+win = display.Window(5, 5)
+win.fill('x', 1, 0, 0)
+win.set_pos(x, y, 'h', 0, 0, 1)
+win.display()
+print(f'\nFPS:{FPS}')
+
 while True:
 	time.sleep(1 / FPS)
-	win.fill('x')
-	
-	win.set_pos(x, y, 'h')
+	win.fill('x', 1, 0, 0)
 	
 	dir = [0, 0]
 	
@@ -43,6 +44,7 @@ while True:
 	elif y == -1:
 		y = win.height - 1
 	
+	win.set_pos(x, y, 'h', 0, 0, 1)
 	
 	win.display()
 	print(f'\nFPS:{FPS}')
