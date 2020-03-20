@@ -11,7 +11,7 @@ class Window:
 		for i in range(self.height):
 			temp = []
 			for j in range(self.width):
-				temp.append(' ')
+				temp.append([' ', 0, 0, 0])
 			
 			self.grid.append(temp)
 			
@@ -24,24 +24,37 @@ class Window:
 		
 		for i in range(len(self.grid)):
 			for j in range(len(self.grid[i])):
-				print(self.grid[i][j], end='')
+				r = self.grid[i][j][1]
+				g = self.grid[i][j][2]
+				b = self.grid[i][j][3]
+
+				console.set_color(r, g, b)
+				
+				print(self.grid[i][j][0], end='')
+				console.set_color()
 			
 			print()
 		
 		return datetime.datetime.now() - start_time
 	
-	def set_pos(self, x, y, char):
+	def set_pos(self, x, y, char, r=0, g=0, b=0):
 		x, y = y, x
 		
 		if len(char) > 1:
 			raise Exception('char too long')
 		
-		self.grid[x-1][y-1] = char
+		self.grid[x-1][y-1][0] = char
+		self.grid[x-1][y-1][1] = r
+		self.grid[x-1][y-1][2] = g
+		self.grid[x-1][y-1][3] = b
 	
-	def fill(self, char=' '):
+	def fill(self, char=' ', r=0, g=0, b=0):
 		if len(char) > 1:
 			raise Exception('char too long')
 		
 		for i in range(len(self.grid)):
 			for j in range(len(self.grid[i])):
-				self.grid[i][j] = char
+				self.grid[i][j][0] = char
+				self.grid[i][j][1] = r
+				self.grid[i][j][2] = g
+				self.grid[i][j][3] = b
